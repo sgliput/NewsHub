@@ -1,0 +1,28 @@
+{
+  "name": "newshub",
+  "version": "1.0.0",
+  "description": "A web-scraping app that allows users to comment on news headlines with a Mongo database",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgliput/NewsHub.git"
+  },
+  "author": "Sam Liput",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sgliput/NewsHub/issues"
+  },
+  "homepage": "https://github.com/sgliput/NewsHub#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.3.15"
+  }
+}

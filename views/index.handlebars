@@ -1,0 +1,100 @@
+<br>
+<div id="titleArea">
+    <br>
+    <h1 class="title">News Hub</h1>
+    <h3 class="subtitle">Where the News Listens to You</h3>
+    <br>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div id="tagArea">
+                <h2>Article Tags</h2>
+                <p>This is a test.</p>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="articleArea">
+                <h2>Articles</h2>
+                <p>Here are the articles.</p>
+                <div class="panel-group" id="accordion">
+                    {{#each articles}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a href="https://www.apnews.com{{articleLink}}">
+                                    <p class="headline">{{headline}}</p>
+                                </a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{iterator}}">
+                                    <i class="fas fa-arrow-down"></i>
+                                </a>
+                            </h4>
+                            <p class="byline">{{byline}}</p>
+                            <p class="summary">{{summary}}</p>
+                        </div>
+                        <div id="collapse{{iterator}}" class="panel-collapse collapse in">
+                            <br>
+                            <div class="panel-body">
+                                <button class="toComment" data-id="{{_id}}" data-toggle="modal" data-target="#commentModal">Post a Comment</button>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<a href="/scrape">
+    <button class="scrape">Scrape News Articles</button>
+</a>
+<br>
+<a href="/all">
+    <button class="all">View All Articles</button>
+</a>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="commentModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Comment Engine</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Commenting on:</h5>
+                <p class="articleGettingComment"></p>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Name:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="name" placeholder="Enter name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Comment:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="5" id="comment" placeholder="Type Comment Here"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-default commentSubmit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/jscript.js"></script>

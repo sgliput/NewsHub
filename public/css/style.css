@@ -1,0 +1,47 @@
+body{
+    background-color: rosybrown;
+}
+
+#titleArea{
+    border-top: 3px dashed black;
+    border-bottom: 3px dashed black;
+    border-radius: 20px;
+    margin: 0 20%;
+}
+
+h1, h3, .articleGettingComment{
+    text-align: center;
+}
+
+.container{
+    text-align: center;
+}
+
+#tagArea{
+    border-right: 3px dashed black;
+}
+
+#accordion{
+    background-color: white;
+}
+
+.panel{
+    border: 1px solid black;
+}
+
+.fas{
+    float: right;
+}
+
+.panel-collapse{
+    border-top: 3px dashed black;
+}
+
+.headline{
+    padding-top: 15px;
+}
+
+.summary{
+    padding: 0 10%;
+}
+

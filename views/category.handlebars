@@ -1,0 +1,133 @@
+<div class="body {{background}}-background">
+    <h1>Trivia Trove</h1>
+    <div id="players">
+        <h2 class="Player1 d-inline">Player:
+        </h2>
+        <span id="score1"></span>
+        <button type="submit" class="btn btn-light btn-lg outline md-trigger md-setperspective submitHighScore" data-modal="pointsModal">Submit Score</button>
+        {{!--
+        <h2 class="player2 d-inline">Player 2:
+            <span id="score2"></span>
+        </h2>
+        <h2 class="player3 d-inline">Player 3:
+            <span id="score3"></span>
+        </h2>
+        style="background-image: url('./images/{{background}}-background.jpg')" --}}
+    </div>
+    <hr>
+    <br>
+
+    <h3 class="currentCat">{{currentCat}}</h3>
+
+
+    <br>
+    <br>
+    <section id="categoryPage">
+
+        <ul class="ch-grid5">
+            {{#each questions}}
+            <li>
+                <div class="ch-item5">
+                    <div class="ch-info5">
+                        <div class="ch-info-front5 {{img}}"></div>
+                        <div class="ch-info-back5 question" data-id="{{id}}">
+                            <br>
+                            <h3>Question {{questionNumber}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+
+        <button type="menu" class="btn btn-light btn-lg outline" id="back">Back to Categories</button>
+
+    </section>
+
+    <section id="questionPage">
+        <div class="container">
+            <div class="row">
+                <p id="questionText"></p>
+            </div>
+            <br>
+            <form>
+                <div class="row choices">
+                    <div class="col-md-6">
+                        <input class="option1" type="radio" name="choices" value="">
+                        <span id="option1"></span>
+                        <br>
+                        <input class="option3" type="radio" name="choices" value="">
+                        <span id="option3"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="option2" type="radio" name="choices" value="">
+                        <span id="option2"></span>
+                        <br>
+                        <input class="option4" type="radio" name="choices" value="">
+                        <span id="option4"></span>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row submitRow">
+                    <button class="submit btn btn-light btn-lg outline md-trigger" type="submit" data-modal="answerModal">Submit</button>
+                </div>
+            </form>
+            
+        </div>
+    </section>
+</div>
+
+
+<div class="md-modal md-effect-4" id="answerModal">
+    <div class="md-content">
+        <div class="modal-header">
+            <h5 class="modal-title answerTitle"></h5>
+            <button type="button" class="close answerClose md-close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="answerBody"></p>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="md-modal md-effect-18" id="pointsModal">
+    <div class="md-content">
+        <div class="modal-header">
+            <h5 class="modal-title pointsTitle" id="exampleModalLabel"></h5>
+            <button type="button" class="close pointsClose md-close" data-dismiss="modal" aria-label="Close">
+                <span class="pointsClose" aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="pointsBody"></p>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="winnerModal" tabindex="-1" role="dialog" aria-labelledby="winnerModel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title winnerTitle" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="winnerClose" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="winnerBody"></p>
+                <button type="submit" class="submitHighScore" id="submitHighScoreModal">Submit Score</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="md-overlay"></div>
+
+<script type="text/javascript" src="/js/category.js"></script>
+<script type="text/javascript" src="/js/classie.js"></script>
+<script type="text/javascript" src="/js/modalEffects.js"></script>
