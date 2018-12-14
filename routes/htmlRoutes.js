@@ -11,25 +11,36 @@ var cheerio = require("cheerio");
 
 module.exports = function (app) {
 
-    app.get("/", function (req, res) {
-        db.Article.find({}, function (err, data) {
+    app.get("/", (req, res) => {
+        db.Article.find({}).populate("comments").then(data => {
             // Log any errors if the server encounters one
-            if (err) {
-                console.log(err);
-            }
-            else {
+           //const tags = [];
                 for (var i = 0; i < data.length; i++) {
                     data[i].iterator = i;
+                    //tags.push(data[i].tag);
                 }
+
+                const tags = [...new Set(data.map(a => a.tag))];
+                tags.sort();
+                const objTags = [];
+                tags.forEach(tag => objTags.push({tagName: tag}));
+
+                console.log(objTags);
+
+
                 // Otherwise, send the result of this query to the browser
-                res.render("index", { articles: data });
-            }
-        });
+                res.render("index", { articles: data, tagList: objTags });
+            
+        })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
 
     });
 
-    app.get("/all", function (req, res) {
-        db.Article.find({}, function (err, data) {
+    app.get("/all", (req, res) => {
+        db.Article.find({}, (err, data) => {
             // Log any errors if the server encounters one
             if (err) {
                 console.log(err);
@@ -41,9 +52,24 @@ module.exports = function (app) {
         });
     });
 
-    app.get("/article/:id", function (req, res) {
+    app.get("/allComments", (req, res) => {
+        db.Comment.find({}, (err, data) => {
+            // Log any errors if the server encounters one
+            if (err) {
+                console.log(err);
+            }
+            else {
+                // Otherwise, send the result of this query to the browser
+                res.json(data);
+            }
+        });
+    });
+
+
+
+    app.get("/article/:id", (req, res) => {
         var id = req.params.id;
-        db.Article.findById(id, function (err, data) {
+        db.Article.findById(id, (err, data) => {
             // Log any errors if the server encounters one
             if (err) {
                 console.log(err);
@@ -55,41 +81,60 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/submitComment/articles/:id", function (req, res) {
+    app.post("/submitComment/articles/:id", (req, res) => {
         var id = req.params.id;
         console.log(id);
         console.log(req.body);
         // Create a new Note in the db
         db.Comment.create(req.body)
-            .then(function (dbComment) {
+            .then(dbComment => {
                 // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
                 // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
                 // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-                console.log(dbComment);
                 return db.Article.findByIdAndUpdate(id, { $push: { comments: dbComment._id } }, { new: true });
             })
-            .then(function (dbArticle) {
+            .then(dbArticle => {
                 // If the User was updated successfully, send it back to the client
+                console.log("dbArticle: ");
+                console.log(dbArticle);
                 res.send(dbArticle);
             })
-            .catch(function (err) {
+            .catch(err => {
                 // If an error occurs, send it back to the client
                 res.send(err);
             });
     });
 
+    app.post("/deleteComment/comments/:id", (req, res) => {
+        var id = req.params.id;
+        console.log(id);
+        console.log(req.body);
+
+        db.Comment.findByIdAndRemove(id, (err, data) => {
+            // As always, handle any potential errors:
+            if (err) return res.status(500).send(err);
+            // We'll create a simple object to send back with a message and the id of the document that was removed
+            // You can really do this however you want, though.
+            const response = {
+                message: "Comment successfully deleted",
+                id: data._id
+            };
+            return res.status(200).send(response);
+        });
+    });
+
     var results = [];
 
-    app.get("/scrape", function (req, res) {
+    app.get("/scrape", (req, res) => {
 
-        axios.get("https://www.apnews.com/apf-topnews").then(function (response) {
+        axios.get("https://www.apnews.com/apf-topnews").then(response => {
 
             var $ = cheerio.load(response.data);
 
             var result = {};
 
             // Now, we grab every h2 within an article tag, and do the following:
-            $(".FeedCard").each(function (i, element) {
+            $(".FeedCard").each(i, element => {
 
                 var headline = $(element).find("h1").text();
                 var byline = $(element).find(".byline").text();
@@ -115,11 +160,11 @@ module.exports = function (app) {
 
                 if (headline && tag && articleLink && summary) {
                     db.Article.updateOne({ headline: $(element).find("h1").text() }, result, { upsert: true })
-                        .then(function (dbArticles) {
+                        .then(dbArticles => {
                             // View the added results in the console
                             console.log(dbArticles);
                         })
-                        .catch(function (err) {
+                        .catch(err => {
                             // If an error occurred, log it
                             console.log(err);
                         });

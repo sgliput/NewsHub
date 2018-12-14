@@ -17,10 +17,7 @@ var ArticleSchema = new Schema({
       type: String,
       unique: true
   },
-  imageSrc: {
-    type: String,
-    default: "http://scd.france24.com/en/files/html_page/image/news_1920x1080.png"
-  },
+  imageSrc: String,
   summary: String,
   // `comments` is an array that stores ObjectIds
   // The ref property links these ObjectIds to the Comment model

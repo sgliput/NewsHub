@@ -11,7 +11,10 @@
         <div class="col-md-3">
             <div id="tagArea">
                 <h2>Article Tags</h2>
-                <p>This is a test.</p>
+                <br> {{#each tagList}}
+                <button>{{tagName}}</button>
+                <br>
+                <br> {{/each}}
             </div>
         </div>
         <div class="col-md-9">
@@ -36,6 +39,12 @@
                         <div id="collapse{{iterator}}" class="panel-collapse collapse in">
                             <br>
                             <div class="panel-body">
+                                {{#each comments}}
+                                <div class="comment">
+                                    <button class="deleteComment" data-commentid="{{_id}}">&times;</button>
+                                    <p>{{name}} said: &nbsp;&nbsp; {{comment}}</p>
+                                </div>
+                                <hr> {{/each}}
                                 <button class="toComment" data-id="{{_id}}" data-toggle="modal" data-target="#commentModal">Post a Comment</button>
                             </div>
                             <br>
@@ -57,6 +66,10 @@
 <br>
 <a href="/all">
     <button class="all">View All Articles</button>
+</a>
+
+<a href="/allComments">
+    <button class="allComments">View All Comments</button>
 </a>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="commentModal">

@@ -45,3 +45,16 @@ h1, h3, .articleGettingComment{
     padding: 0 10%;
 }
 
+.comment{
+    margin: 0 auto;
+    width: 60%;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.deleteComment{
+   float:right;
+   position: relative;
+   right: 3%;
+}
+
