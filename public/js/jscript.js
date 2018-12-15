@@ -12,6 +12,9 @@ $(".bylineSearch").on("click", function() {
 
 $(".toComment").on("click", function() {
     $(".articleGettingComment").empty();
+    $(".commentSubmit").prop("disabled", true);
+    $("#name").val("");
+    $("#comment").val("");
 
     var thisId = $(this).attr("data-id");
     $(".commentSubmit").attr("data-id", thisId);
@@ -21,6 +24,20 @@ $(".toComment").on("click", function() {
         $(".articleGettingComment").text(data.headline);
     });
 });
+
+$("#name").on("input", function () {
+if ($("#comment").val()) {
+    $(".commentSubmit").prop("disabled", false);
+  }
+});
+
+  //When a name is entered in the playerName field, the log-in button is enabled if a difficulty button has been already pressed
+  $("#comment").on("input", function () {
+    if ($("#name").val()) {
+      $(".commentSubmit").prop("disabled", false);
+    }
+  });
+
 
 $(".commentSubmit").on("click", e => {
     e.preventDefault();

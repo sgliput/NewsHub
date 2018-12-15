@@ -1,5 +1,5 @@
 body{
-    background-color: rosybrown;
+    background-color: #2f63a3;
     font-family: 'Nunito', sans-serif;
 }
 
@@ -20,8 +20,10 @@ body{
 }
 
 .intro{
-    color: white;
-    text-shadow: 2px 2px black;
+    color: black;
+    text-shadow: 2px 2px white;
+    font-weight: bold;
+    font-size: 1.3rem;
 }
 
 .buttonRow{
@@ -29,11 +31,15 @@ body{
     border-bottom: 3px dashed black;
 }
 
+button{
+    cursor: pointer;
+}
+
 h1, h2, h3, .articleGettingComment{
     text-align: center;
 }
 
-h2{
+.container h2{
     color: white;
     text-shadow: 2px 2px black;
 }
@@ -46,12 +52,10 @@ h2{
     border-right: 3px dashed black;
 }
 
-#accordion{
-    background-color: white;
-}
-
 .panel{
-    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    border: 2px solid black;
 }
 
 .fas{
@@ -119,6 +123,13 @@ h2{
 #footer span{
     position: relative;
     top: 25%;
+}
+
+.modal-content{
+    background-color: #2f63a3;
+    color: white;
+    text-shadow: 2px 2px black;
+    border: 4px solid white;
 }
 
 @media screen and (max-width: 868px) {
