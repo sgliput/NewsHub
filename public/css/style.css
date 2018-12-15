@@ -1,5 +1,12 @@
 body{
     background-color: rosybrown;
+    font-family: 'Nunito', sans-serif;
+}
+
+#topArea{
+    background-image: url("../images/news.jpg");
+    background-size: 100% 100%;
+    text-align: center;
 }
 
 #titleArea{
@@ -7,10 +14,28 @@ body{
     border-bottom: 3px dashed black;
     border-radius: 20px;
     margin: 0 20%;
+    background-color: white;
+    opacity: 0.7; 
+    text-shadow: 2px 2px brown;;  
+}
+
+.intro{
+    color: white;
+    text-shadow: 2px 2px black;
+}
+
+.buttonRow{
+    border-top: 3px dashed black;
+    border-bottom: 3px dashed black;
 }
 
 h1, h2, h3, .articleGettingComment{
     text-align: center;
+}
+
+h2{
+    color: white;
+    text-shadow: 2px 2px black;
 }
 
 .container{
@@ -63,7 +88,11 @@ h1, h2, h3, .articleGettingComment{
 }
 
 .allButton{
-    float: left;
+    margin: 20px 0 20px 55%;
+}
+
+.tagSearch{
+    margin: 20px 0 20px 6%;
 }
 
 .storyTag{
@@ -72,7 +101,46 @@ h1, h2, h3, .articleGettingComment{
     padding: 10px;
 }
 
-/* #bylineArea{
-    display: none;
-} */
+.jsonButtons{
+    margin: 0 0 0 5%;
+}
 
+.jsonButtons h6{
+    margin-left: 6%;
+}
+
+#footer{
+    height: 50px;
+    background-color: brown;
+    color: white;
+    text-align: center;
+}
+
+#footer span{
+    position: relative;
+    top: 25%;
+}
+
+@media screen and (max-width: 868px) {
+    .allButton{
+        margin: 20px 0 20px 40%;
+    }
+  }
+
+  @media screen and (max-width: 628px) {
+    .allButton{
+        margin: 20px 0 20px 20%;
+    }
+  }
+
+  @media screen and (max-width: 458px) {
+    .allButton{
+        margin: 20px 0 20px 0;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #tagArea, #bylineArea{
+        border-right: none;
+    }
+  }

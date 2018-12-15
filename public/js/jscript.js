@@ -62,7 +62,7 @@ $(".deleteComment").on("click", e => {
     }).then(data => {
         console.log(data);
     });
-    //location.reload();
+    location.reload();
 });
 
 
