@@ -11,7 +11,10 @@ var ArticleSchema = new Schema({
     type: String,
     unique: true
   },
-  byline: String,
+  byline: {
+    type: String,
+    default: "Anonymous"
+  },
   tag: String,
   articleLink: {
       type: String,

@@ -1,3 +1,15 @@
+$(".tagSearch").on("click", function() {
+    $("#tagArea").show();
+    $("#bylineArea").hide();
+});
+
+$(".bylineSearch").on("click", function() {
+    $("#bylineArea").show();
+    $("#tagArea").hide();
+});
+
+
+
 $(".toComment").on("click", function() {
     $(".articleGettingComment").empty();
 
@@ -7,10 +19,7 @@ $(".toComment").on("click", function() {
     $.getJSON("/article/" + thisId, data => {
         console.log(data.headline);
         $(".articleGettingComment").text(data.headline);
-
     });
-
-
 });
 
 $(".commentSubmit").on("click", e => {
@@ -44,14 +53,16 @@ $(".commentSubmit").on("click", e => {
 $(".deleteComment").on("click", e => {
     e.preventDefault();
     let commentID = $(e.currentTarget).attr("data-commentid");
+    let articleID = $(e.currentTarget).attr("data-articleid");
     console.log($(this));
     console.log("Comment ID: " + commentID);
     $.ajax({
         method: "POST",
-        url: "/deleteComment/comments/" + commentID,
+        url: "/deleteComment/" + articleID + "/comments/" + commentID,
     }).then(data => {
         console.log(data);
     });
-    location.reload();
-})
+    //location.reload();
+});
+
 

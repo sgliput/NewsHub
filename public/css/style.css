@@ -9,7 +9,7 @@ body{
     margin: 0 20%;
 }
 
-h1, h3, .articleGettingComment{
+h1, h2, h3, .articleGettingComment{
     text-align: center;
 }
 
@@ -17,7 +17,7 @@ h1, h3, .articleGettingComment{
     text-align: center;
 }
 
-#tagArea{
+#tagArea, #bylineArea{
     border-right: 3px dashed black;
 }
 
@@ -57,4 +57,22 @@ h1, h3, .articleGettingComment{
    position: relative;
    right: 3%;
 }
+
+.tag{
+    border-radius: 15px;
+}
+
+.allButton{
+    float: left;
+}
+
+.storyTag{
+    float: left;
+    font-size: 0.8rem;
+    padding: 10px;
+}
+
+/* #bylineArea{
+    display: none;
+} */
 

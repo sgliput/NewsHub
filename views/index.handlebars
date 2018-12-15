@@ -7,16 +7,27 @@
 </div>
 <br>
 <div class="container">
+    <a href="/"><button class="allButton">All Stories</button></a>
+    <button class="tagSearch">Search by Tag</button>
+        <button class="bylineSearch">Search by Byline</button>
+        <br>
     <div class="row">
-        <div class="col-md-3">
-            <div id="tagArea">
+        
+        <div class="col-md-3" id="tagArea" style="display: {{display1}}">
                 <h2>Article Tags</h2>
                 <br> {{#each tagList}}
-                <button>{{tagName}}</button>
+                <a href="/tags/{{tagName}}"><button class="tag">{{tagName}}</button></a>
+                <br>
+                <br> {{/each}}  
+        </div>
+            <div class="col-md-3" id="bylineArea" style="display: {{display2}}">
+                <h2>Bylines</h2>
+                <br> {{#each bylineList}}
+                <a href="/bylines/{{bylineName}}"><button class="tag">{{bylineName}}</button></a>
                 <br>
                 <br> {{/each}}
             </div>
-        </div>
+            <br>
         <div class="col-md-9">
             <div id="articleArea">
                 <h2>Articles</h2>
@@ -26,6 +37,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
+                                <span class="storyTag">Tagged: {{tag}}</span>
+                                <br>
                                 <a href="https://www.apnews.com{{articleLink}}">
                                     <p class="headline">{{headline}}</p>
                                 </a>
@@ -33,7 +46,7 @@
                                     <i class="fas fa-arrow-down"></i>
                                 </a>
                             </h4>
-                            <p class="byline">{{byline}}</p>
+                            <p class="byline">By {{byline}}</p>
                             <p class="summary">{{summary}}</p>
                         </div>
                         <div id="collapse{{iterator}}" class="panel-collapse collapse in">
@@ -41,7 +54,7 @@
                             <div class="panel-body">
                                 {{#each comments}}
                                 <div class="comment">
-                                    <button class="deleteComment" data-commentid="{{_id}}">&times;</button>
+                                    <button class="deleteComment" data-commentid="{{_id}}" data-articleid="{{articleID}}">&times;</button>
                                     <p>{{name}} said: &nbsp;&nbsp; {{comment}}</p>
                                 </div>
                                 <hr> {{/each}}
@@ -59,10 +72,6 @@
 </div>
 
 
-<br>
-<a href="/scrape">
-    <button class="scrape">Scrape News Articles</button>
-</a>
 <br>
 <a href="/all">
     <button class="all">View All Articles</button>
