@@ -3,8 +3,7 @@ var mongoose = require("mongoose");
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
 
-// Using the Schema constructor, create a new CommentSchema object
-// This is similar to a Sequelize model
+// Using the Schema constructor, a new CommentSchema object is created, similar to a Sequelize model
 var CommentSchema = new Schema({
   // `name` must be of type String and has a default of "Anonymous"
   name: {
@@ -16,6 +15,7 @@ var CommentSchema = new Schema({
     type: String,
     required: true
   },
+  // `articleID` is required and must be of type String
   articleID: {
     type: String,
     required: true

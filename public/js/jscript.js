@@ -1,55 +1,55 @@
-$(".tagSearch").on("click", function() {
+//When the tagSearch button is clicked, it hides the byline column and shows the tag column
+$(".tagSearch").on("click", () => {
     $("#tagArea").show();
     $("#bylineArea").hide();
 });
 
-$(".bylineSearch").on("click", function() {
+//When the tagSearch button is clicked, it hides the tag column and shows the byline column
+$(".bylineSearch").on("click", () => {
     $("#bylineArea").show();
     $("#tagArea").hide();
 });
 
-
-
-$(".toComment").on("click", function() {
+//When the "Post a Comment" button is clicked and the modal appears
+$(".toComment").on("click", e => {
+    //The modal is emptied of any article titles
     $(".articleGettingComment").empty();
+    //The submit button is disabled, and the fields are emptied
     $(".commentSubmit").prop("disabled", true);
     $("#name").val("");
     $("#comment").val("");
 
-    var thisId = $(this).attr("data-id");
+    //The data-id of the "Post a Comment" button (for the specific article) is transferred to the submit button
+    var thisId = $(e.currentTarget).attr("data-id");
     $(".commentSubmit").attr("data-id", thisId);
 
+    //Get call to display the name of the article being commented on
     $.getJSON("/article/" + thisId, data => {
         console.log(data.headline);
         $(".articleGettingComment").text(data.headline);
     });
 });
 
-$("#name").on("input", function () {
-if ($("#comment").val()) {
-    $(".commentSubmit").prop("disabled", false);
-  }
-});
-
-  //When a name is entered in the playerName field, the log-in button is enabled if a difficulty button has been already pressed
-  $("#comment").on("input", function () {
-    if ($("#name").val()) {
+  //When a comment is entered in the comment field, the submit button is enabled
+  $("#comment").on("input", () => {
       $(".commentSubmit").prop("disabled", false);
-    }
   });
 
-
+//When the submit button is clicked
 $(".commentSubmit").on("click", e => {
     e.preventDefault();
+    //The submit button's data-id attribute is stored in the thisId variable
     var thisId = $(e.currentTarget).attr("data-id");
-    // Value taken from name input
+    // name is assigned the value taken from the name input
     var name = $("#name").val();
-    // Value taken from comment textarea
+    // comment is assigned the value taken from the comment textarea
     var comment = $("#comment").val();
+    // The name, comment, and articleID art stored in an object for the ajax call
     var postObj = {name: name, comment: comment, articleID: thisId};
     console.log("postObj: ");
     console.log(postObj);
 
+    //AJAX Post call for adding the comment to the database
     $.ajax({
         method: "POST",
         url: "/submitComment/articles/" + thisId,
@@ -62,23 +62,28 @@ $(".commentSubmit").on("click", e => {
             // Log the response
             console.log(data);
         });
-    //$('#commentModal').modal('hide');
+   //Reload the page to reflect new comment
     location.reload();
 
 });
 
+//When the deleteComment button is clicked
 $(".deleteComment").on("click", e => {
     e.preventDefault();
+    //The data-attributes are stored in variables
     let commentID = $(e.currentTarget).attr("data-commentid");
     let articleID = $(e.currentTarget).attr("data-articleid");
-    console.log($(this));
     console.log("Comment ID: " + commentID);
+    
+    //AJAX Post call for deleting the comment from the database (including from the comments array of its related Article)
     $.ajax({
         method: "POST",
         url: "/deleteComment/" + articleID + "/comments/" + commentID,
     }).then(data => {
+        //Then log the response
         console.log(data);
     });
+    //And reload the page to reflect the change
     location.reload();
 });
 

@@ -3,24 +3,28 @@ var mongoose = require("mongoose");
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
 
-// Using the Schema constructor, create a new ArticleSchema object
-// This is similar to a Sequelize model
+// Using the Schema constructor, a new ArticleSchema object is created, similar to a Sequelize model
 var ArticleSchema = new Schema({
   // `headline` must be unique and of type String
   headline: {
     type: String,
     unique: true
   },
+  // `byline` must be of type String and has a default of "Anonymous" (if it is read as "undefined")
   byline: {
     type: String,
     default: "Anonymous"
   },
+  // `tag` must be a String
   tag: String,
+  // `articleLink` must be unique and of type String
   articleLink: {
       type: String,
       unique: true
   },
+  // `imageSrc` must be a String (didn't get to this, but will add later if possible)
   imageSrc: String,
+  // `summary` must be a String
   summary: String,
   // `comments` is an array that stores ObjectIds
   // The ref property links these ObjectIds to the Comment model
@@ -29,7 +33,7 @@ var ArticleSchema = new Schema({
     {
       // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
-      // The ObjectIds will refer to the ids in the Note model
+      // The ObjectIds will refer to the ids in the Comment model
       ref: "Comment"
     }
   ]
